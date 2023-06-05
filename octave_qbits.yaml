@@ -1,0 +1,30 @@
+---
+layout: "octave_qbit"
+permalink: "octave_qbit/"
+description: >-
+  Qbit functions and teleport circuit implementation in GNU Octave
+icon: "https://notabug.org/fermentaria/octave_qbits/raw/master/logo.png"
+links:
+  - icon: "far fa-copyright"
+    label: "GPL-3.0-or-later"
+maintainers:
+  - name: "Yassin Achengli"
+    contact: "relifenatu@gmail.com"
+  - name: "Jesús Bravo Ruiz"
+    contact: "js_bravo98@uma.es"
+versions:
+  - id: "1.0.0"
+    date: "2023-06-06"
+    sha256: "6b7e4b6bef5a681cb8026af55c401cee139b088480f0da60143e02ec8880cb51"
+    url: "https://notabug.org/fermentaria/octave_qbits/archive/1.0.0.tar.gz"
+    depends:
+      - "octave (>= 4.0.0)"
+      - "pkg"
+  - id: "dev"
+    date:
+    sha256:
+    url: "https://notabug.org/fermentaria/octave_qbits/archive/master.tar.gz"
+    depends:
+      - "octave (>= 5.2.0)"
+      - "pkg"
+---

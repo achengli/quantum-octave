@@ -1,5 +1,5 @@
 function out=qc_second_block_noCNOT(qbin,M)
-## qc_first_block.m
+## qc_second_block_noCNOT.m
 ## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify

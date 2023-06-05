@@ -1,5 +1,5 @@
 function Mout=qc_classic_logic_block(M)
-## qc_first_block.m
+## qc_classic_logic_block.m
 ## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
@@ -14,6 +14,7 @@ function Mout=qc_classic_logic_block(M)
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+## --------------------------------------------------------------------
 ## 
 ##			   M1      M2 
 ##			   |       |
@@ -25,6 +26,13 @@ function Mout=qc_classic_logic_block(M)
 ##			+-------------+
 ##			   |       |
 ##			   M3      M4
+## 
+## --------------------------------------------------------------------
+## Converts M coeficients to M' mapping them according to the responses that 
+## the second block retrieves without CNOT blocks. 
+##
+## @param M Vector # Vector of unsigned with original coefficients.
+## @return Vector equivalent coefficients.
     if nargin<1 || ~ismatrix(M) || length(M) ~= 4
         print_usage();
     endif
@@ -38,3 +46,8 @@ function Mout=qc_classic_logic_block(M)
     index = sum((2.^[3 2 1 0]') .* M)+1;
     Mout=Mp_m(index,:)';
 endfunction;
+
+%! assert(qc_classic_logic_block([ 0 0 0 0]') == [0 1 0 1]')
+%! assert(qc_classic_logic_block([ 0 0 1 1]') == [1 1 1 0]')
+%! assert(qc_classic_logic_block([ 0 1 0 0]') == [0 1 0 1]')
+%! assert(qc_classic_logic_block([ 0 0 1 0]') == [1 1 1 1]')

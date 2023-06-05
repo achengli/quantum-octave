@@ -1,4 +1,4 @@
-## qc_second_block.m
+## qc_generate_M.m
 ## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify

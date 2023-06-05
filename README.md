@@ -1,3 +1,13 @@
 # octave_qbits
 
-This is a project for GNU Octave. Is a package that globalizes a set of functions for cuantics computing.
+![octave_qbits](https://notabug.org/fermentaria/octave_qbits/raw/master/logo.png)
+---
+
+GNU Octave qbits Toolbox. Implement some important and useful blocks and qbit functions.
+
+---
+
+## Mantainers
+- **Yassin Achengli** *<relifenatu@gmail.com>*
+- **Jesús Bravo** *<js_bravo98@uma.es>*
+
