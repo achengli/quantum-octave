@@ -13,22 +13,23 @@
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+## --------------------------------------------------------------------------
+## This block generates the 4 combinated qbits state with each of the four 
+## qbits as |0>. The combination returns a 4x1 column vector with a normalized
+## state.
+##
+##			|0> ---H-----o-----I----- | 
+##			             |            |
+##			|0> ---I-----X-----o----- |
+##			                   |      |==> out
+##			|0> ---I-----X-----X----- |
+##			             |            |
+##			|0> ---H-----o-----I----- |
+##
+## @returns DoubleColumnVector
+## --------------------------------------------------------------------------  
 function out = qc_first_block()
-    % This block generates the 4 combinated qbits state with each of the four 
-    % qbits as |0>. The combination returns a 4x1 column vector with a normalized
-    % state.
-    %
-    %			|0> ---H-----o-----I----- | 
-    %			             |            |
-    %			|0> ---I-----X-----o----- |
-    %			                   |      |==> out
-    %			|0> ---I-----X-----X----- |
-    %			             |            |
-    %			|0> ---H-----o-----I----- |
-    %
-    % @returns DoubleColumnVector
-    
+  
     if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
     endif

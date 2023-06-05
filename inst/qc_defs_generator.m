@@ -13,8 +13,8 @@
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-% This script generates qc_defs.mat file with necesary qbits objects.
+## -------------------------------------------------------------------
+## This script generates qc_defs.mat file with necesary qbits objects.
 
 clear all; close all;
 I=eye(2);Z=[1 0;0 -1];X=[0 1;1 0];Y=[0 -i;i 0];     % Pauli doors I,X,Y,Z
