@@ -1,3 +1,4 @@
+function out = qc_first_block()
 ## qc_first_block.m
 ## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
 ## 
@@ -27,9 +28,7 @@
 ##			|0> ---H-----o-----I----- |
 ##
 ## @returns DoubleColumnVector
-## --------------------------------------------------------------------------  
-function out = qc_first_block()
-  
+## --------------------------------------------------------------------------   
     if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
     endif
