@@ -29,4 +29,4 @@ function qb = qc_ket(qb)
     if size(qb,1) < size(qb,2),
         qb = qb';
     endif
-endfunction
+endfunction;

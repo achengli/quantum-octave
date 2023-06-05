@@ -27,4 +27,6 @@ B2z=kron(I,I);                  % 2Q computational base
 B2x=kron(B1x,B1x);              % 2Q Hadamard base
 B2bell=CNOT*kron(H,I)*B2z;      % Bell base.
 
-save(all, 'qc_defs.mat');
+qc_defs_loaded = true;
+
+save -binary 'qc_defs.mat'

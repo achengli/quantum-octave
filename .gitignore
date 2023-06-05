@@ -39,4 +39,6 @@ tramp
 
 # cask packages
 .cask/
-
+inst/*.mat
+src/*.o
+build

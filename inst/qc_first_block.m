@@ -29,7 +29,9 @@ function out = qc_first_block()
     %
     % @returns DoubleColumnVector
     
-    load qc_defs.mat;
+    if ~exist('qc_defs_loaded'),
+        load qc_defs.mat;
+    endif
     qb0 = [1;0];
     qc0 = kron(qb0, kron(qb0, kron(qb0,qb0)));
     CNOTI = [1 0 0 0; 
