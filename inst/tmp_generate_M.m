@@ -47,4 +47,4 @@ M_coefs_loaded=true;
 M_m = M; Mp_m = Mp;
 clear M Mp;
 
-save -binary 'M_coefs.mat' M Mp
+save -binary 'M_coefs.mat' M_m Mp_m M_coefs_loaded
