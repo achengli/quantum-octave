@@ -1,5 +1,5 @@
-## qc_generate_M.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -13,12 +13,17 @@
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## -------------------------------------------------------------------
 
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} @qcode{qc_generate_M}
+## 
 ## This script maps all the combinations of M input in the second block searching for the match 
 ## which apply to the second block without CNOT blocks retrieves the same response.
 ## Saves M and Mp to M_coefs.mat. qc_classic_logic_block.m use the data inside for mapping the 
 ## M input for an M output
+## 
+## @seealso{qc_defs_generator}
+## @end deftypefn
 
 qb = [1;1]; qbin = kron(qb,qb);
 M = [0 0 0 0; 0 0 0 1; 0 0 1 0; 0 0 1 1;
@@ -33,7 +38,7 @@ for iter=1:size(M,1),
     for iter2=1:size(M,1),
         Mmrow = M(iter2,:);
         qc_result2=qc_second_block_noCNOT(qbin,Mmrow');
-        if sum(abs(qc_result2 - qc_result)) < 1e-9,         % 1e-7 (error margin)
+        if sum(abs(qc_result2 - qc_result)) < 1e-9,         % 1e-9 (error margin)
             Mp(iter,:) = Mmrow;
         endif
     endfor
