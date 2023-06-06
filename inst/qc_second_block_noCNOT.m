@@ -34,14 +34,16 @@
 ## @end ifnottex
 ##
 ## Params:
+## 
 ## @itemize
 ## @item @var{qbin}
 ## @item @var{M}
 ## @end itemize
 ## 
 ## Return:
+## 
 ## @itemize
-## @item @{var{out}}
+## @item @var{out}
 ## @end itemize
 ##
 ## @seealso{qc_defs_generator}
