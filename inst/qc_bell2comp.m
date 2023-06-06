@@ -28,11 +28,18 @@
 ## @item @var{qb2_comp} Vector in computational base.
 ## @end itemize
 ## 
+## @ifnottex
+## @example
+## 
 ## Implemented circuit.
 ##
 ## |BELL> --o--H-- |COMP>
 ##          |          
 ## |BELL> --X--I-- |COMP>
+## 
+## @end example
+## @end ifnottex
+## @end deftypefn
 
 function qb2_comp=qc_bell2comp(qb2_bell)
     if nargin < 1 || ~ismatrix(qb2_bell),
