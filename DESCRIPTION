@@ -1,0 +1,11 @@
+Name: octave_qbits
+Version: 1.0.0
+Date: 2023-06-06
+Author: various authors
+Maintainer: Yassin Achengli <relifenatu@gmail.com> Jesus Bravo <js_bravo98@uma.es>
+Title: Quantum Computing
+Description: Set of blocks and utilities for quantics.
+Categories: Physics, Logic, Computing
+Depends: octave (>= 5.2.0)
+License: GPLv3+
+Url: https://notabug.org/fermentaria/octave_qbits
