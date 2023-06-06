@@ -1,5 +1,5 @@
-## qc_defs_generator.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -13,8 +13,29 @@
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## -------------------------------------------------------------------
+
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} qc_defs_generator
+## 
 ## This script generates qc_defs.mat file with necesary qbits objects.
+## 
+## @ifnottex
+## @example
+##        | 1     0 |       | 0.707  0.707 |
+##    I = |         | , H = |              |
+##        | 0     1 |       | 0.707  0.707 |
+## 
+##        | 1  0  0  0 |
+##        | 0  1  0  0 |
+## CNOT = | 0  0  0  1 |
+##        | 0  0  1  0 |
+##
+## @end example
+## @end ifnottex
+## 
+## Results are saved into 'qc_defs.mat'
+## @seealso{qc_generate_M}
+## @end deftypefn
 
 clear all; close all;
 I=eye(2);Z=[1 0;0 -1];X=[0 1;1 0];Y=[0 -i;i 0];     % Pauli doors I,X,Y,Z

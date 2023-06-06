@@ -1,5 +1,3 @@
-function qb2_comp=qc_bell2comp(qb2_bell)
-## qc_classic_logic_block.m
 ## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
@@ -14,20 +12,29 @@ function qb2_comp=qc_bell2comp(qb2_bell)
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## --------------------------------------------------------------------
-## function qb2_comp=qc_bell2comp(qb2_bell);
+
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} {@var{qb2_comp} =} qc_bell2comp(@var{qb2_bell})
+##
 ## Conversion from Computational base to Bell base.
+## 
+## Parameters:
+## @itemize
+## @item @var{qb2_bell} Vector in bell base. 
+## @end itemize
 ##
-## @param qb2_bell Vector # Input vector in the Bell base.
-## @return Vector # Computational equivalent.
-##
+## Return:
+## @itemize
+## @item @var{qb2_comp} Vector in computational base.
+## @end itemize
+## 
 ## Implemented circuit.
 ##
 ## |BELL> --o--H-- |COMP>
 ##          |          
 ## |BELL> --X--I-- |COMP>
-## 
-## --------------------------------------------------------------------
+
+function qb2_comp=qc_bell2comp(qb2_bell)
     if nargin < 1 || ~ismatrix(qb2_bell),
         print_usage();
     endif

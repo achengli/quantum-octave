@@ -1,6 +1,5 @@
-function Mout=qc_classic_logic_block(M)
-## qc_classic_logic_block.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -14,8 +13,13 @@ function Mout=qc_classic_logic_block(M)
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## --------------------------------------------------------------------
+
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} {@var{Mout} =} qc_classic_logic_block (@var{M})
 ## 
+## @ifnottex
+## @example
+## @group
 ##			   M1      M2 
 ##			   |       |
 ##			+-------------+
@@ -26,13 +30,24 @@ function Mout=qc_classic_logic_block(M)
 ##			+-------------+
 ##			   |       |
 ##			   M3      M4
+## @end group
+## @end example
+## @end ifnottex
 ## 
-## --------------------------------------------------------------------
-## Converts M coeficients to M' mapping them according to the responses that 
+## Converts M coeficients to M" mapping them according to the responses that 
 ## the second block retrieves without CNOT blocks. 
-##
-## @param M Vector # Vector of unsigned with original coefficients.
-## @return Vector equivalent coefficients.
+## 
+## Params:
+## @itemize
+## @item @var{M} Vector of unsigned with original coefficients.
+## @end itemize
+## 
+## Return:
+## @itemize
+## @item @var{Mout} Vector equivalent coefficients.
+## @end itemize
+
+function Mout=qc_classic_logic_block(M)
     if nargin<1 || ~ismatrix(M) || length(M) ~= 4
         print_usage();
     endif

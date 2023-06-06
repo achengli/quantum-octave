@@ -1,6 +1,5 @@
-function out = qc_second_block(qb_in,M)
-## qc_second_block.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -14,10 +13,15 @@ function out = qc_second_block(qb_in,M)
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## -------------------------------------------------------------------
+
+## -*- texinfo -*-
+## @deftypefn @qcode{@var{out} =} qc_second_block (@var{qbin}, @var{M})
+##
 ## Intermediate block of the teleport circuit. This block is after the first_block and before
 ## the bell predictor.
-##
+## 
+## @ifnottex
+## @example
 ##		         M2    M1
 ##		          |    |
 ##		----o-----X----Z-----o-----
@@ -25,11 +29,24 @@ function out = qc_second_block(qb_in,M)
 ##		----X-----X----Z-----X-----
 ##		          |    |
 ##		         M4    M3
+## @end example
+## @end ifnottex
+##
+## Params:
+## @itemize
+## @item @var{qbin} input qbit state
+## @item @var{M} circuit coefficients 
+## @end itemize
+##
+## Return:
+## @itemize
+## @item @var{out} result after the circuit
+## @end itemize
 ## 
-## @param qb_in ColumnVector # ...
-## @param M UnsignedVector # ...
-## @returns ColumnVector
-## -------------------------------------------------------------------
+## @seealso{qc_second_block_noCNOT}
+## @end deftypefn
+
+function out = qc_second_block(qb_in,M)
     if (nargin < 2 || length(M) < 4),
         print_usage();
     endif

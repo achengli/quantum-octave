@@ -1,5 +1,5 @@
-## qc_ket.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -13,15 +13,25 @@
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## ---------------------------------------------------------------------
-## function qb = qc_ket(qb);
+
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} {@var{qb} =} qc_ket (@var{qb})
 ##
 ## Checks if it is a column key and if it is then returns the vector normalized, 
 ## if not then returns the transpose normalized
-##
-## @param qb DoubleMatrix
-## @returns DoubleMatrix
-## ---------------------------------------------------------------------
+## 
+## Params:
+## @itemize
+## @item @qcode{@var{qb}} qbit state.
+## @end itemize
+## 
+## Return:
+## @itemize
+## @item @qcode{@var{qb}} qbit state as a column row normalized.
+## @end itemize
+## 
+## @end deftypefn
+
 function qb = qc_ket(qb) 
     if nargin < 1 && ~isvector(qb),
         print_usage();

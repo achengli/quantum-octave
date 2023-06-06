@@ -1,6 +1,5 @@
-function out = qc_first_block()
-## qc_first_block.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -14,11 +13,16 @@ function out = qc_first_block()
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## --------------------------------------------------------------------------
+
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} {@var{out} =} qc_first_block ()
+##
 ## This block generates the 4 combinated qbits state with each of the four 
 ## qbits as |0>. The combination returns a 4x1 column vector with a normalized
 ## state.
-##
+## 
+## @ifnottex
+## @example
 ##			|0> ---H-----o-----I----- | 
 ##			             |            |
 ##			|0> ---I-----X-----o----- |
@@ -26,9 +30,16 @@ function out = qc_first_block()
 ##			|0> ---I-----X-----X----- |
 ##			             |            |
 ##			|0> ---H-----o-----I----- |
+## @end ifnottex
+## @end example
 ##
-## @returns DoubleColumnVector
-## --------------------------------------------------------------------------   
+## Params:
+## @itemize
+## @item @qcode{@var{out}} qbit state in question.
+## @end itemsize
+## @seealso{qc_second_block,qc_second_block_noCNOT}
+## @end deftypefn
+function out = qc_first_block()
     if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
     endif

@@ -1,6 +1,5 @@
-function out=qc_second_block_noCNOT(qbin,M)
-## qc_second_block_noCNOT.m
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -14,11 +13,16 @@ function out=qc_second_block_noCNOT(qbin,M)
 ## 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-## ------------------------------------------------------------------------
+
+## -*- texinfo -*-
+## @deftypefn {octave_qbits} @qcode{@var{out} =} qc_second_block_noCNOT (@var{qbin}, @var{M})
+##
 ## Intermediate block of the teleport circuit without CNOT blocks. This block
 ## is used to obtain results representing how will be the output if we removed
 ## CNOT blocks.
-##
+## 
+## @ifnottex
+## @example
 ##		         M2    M1
 ##		          |    |
 ##		     -----X----Z-----
@@ -26,11 +30,24 @@ function out=qc_second_block_noCNOT(qbin,M)
 ##		     -----X----Z-----
 ##		          |    |
 ##		         M4    M3
+## @end example
+## @end ifnottex
+##
+## Params:
+## @itemize
+## @item @var{qbin}
+## @item @var{M}
+## @end itemize
 ## 
-## @param qbin ColumnVector # ...
-## @param M UnsignedVector # ...
-## @returns ColumnVector
-## -------------------------------------------------------------------
+## Return:
+## @itemize
+## @item @{var{out}}
+## @end itemize
+##
+## @seealso{qc_defs_generator}
+## @end deftypefn
+
+function out=qc_second_block_noCNOT(qbin,M)
 if (nargin < 2 || length(M) < 4),
         print_usage();
     endif
