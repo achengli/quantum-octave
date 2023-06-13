@@ -42,3 +42,7 @@ tramp
 inst/*.mat
 src/*.o
 build
+
+octave-workspace
+*/octave-workspace
+.*/octave-workspace
