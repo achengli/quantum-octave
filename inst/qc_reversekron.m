@@ -39,19 +39,20 @@
 ## @end itemsize
 ## @seealso{qc_second_block,qc_second_block_noCNOT}
 ## @end deftypefn
-function out = qc_first_block()
-    if ~exist('qc_defs_loaded'),
-        load qc_defs.mat;
+function qbits = qc_reversekron(qbin)
+    if (nargin < 1 || !ismatrix(qbin))
+        print_usage();
     endif
-    qb0 = [1;0];
-    qc0 = kron(qb0, kron(qb0, kron(qb0,qb0)));
-    CNOTi = [1 0 0 0; 
-            0 0 0 1; 
-            0 0 1 0; 
-            0 1 0 0];
-    op1 = kron(kron(H,I),kron(I,H));
-    op2 = kron(CNOT, CNOTi);
-    op3 = kron(I, kron(CNOT, I));
-
-    out = qc_ket(op3 * op2 * op1 * qc0);
-endfunction;
+    
+    qbin = qc_ket(qbin);
+    valued_indexes = dec2bin(find(qbin != 0),size(log2(size(qbin,1)),1));
+    qbits = [];
+    for idx = 1:size(valued_indexes,2)
+        valued_indexes(:,idx)
+        spin_0 = find(strcmp(valued_indexes(:,idx),'0'));
+        spin_1 = find(strcmp(valued_indexes(:,idx),'1'));
+        spin_0 = sum(qbin(spin_0));
+        spin_1 = sum(qbin(spin_1));
+        qbits = [qbits; qc_ket([spin_0, spin_1])];
+    endfor
+endfunction

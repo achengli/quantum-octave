@@ -48,7 +48,7 @@
 ## @end itemize
 
 function Mout=qc_classic_logic_block(M)
-    if nargin<1 || ~ismatrix(M) || length(M) ~= 4
+    if (nargin!=1 || !ismatrix(M) || length(M) != 4),
         print_usage();
     endif
     M = reshape(M,4,1);

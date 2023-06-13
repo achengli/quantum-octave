@@ -14,30 +14,8 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-## -*- texinfo -*-
-## @deftypefn {octave_qbits} {@var{qb} =} qc_ket (@var{qb})
-##
-## Checks if it is a column key and if it is then returns the vector normalized, 
-## if not then returns the transpose normalized
-## 
-## Params:
-## @itemize
-## @item @qcode{@var{qb}} qbit state.
-## @end itemize
-## 
-## Return:
-## @itemize
-## @item @qcode{@var{qb}} qbit state as a column row normalized.
-## @end itemize
-## 
-## @end deftypefn
+CC := mkoctfile -Wall -g
+CFILES := $(wildcard src/*.{cc,cpp})
 
-function qb = qc_ket(qb) 
-    if nargin < 1 && ~isvector(qb),
-        print_usage();
-    endif
-    qb = qb ./norm(qb);
-    if (size(qb,1) != length(qb)),
-        qb = reshape(qb,length(qb),1);       % create column vector.
-    endif
-endfunction;
+%.o: %.cc %.cpp
+	$(CC) -o $@ $<

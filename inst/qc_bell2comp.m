@@ -1,4 +1,5 @@
-## Copyright (C) Yassin Achengli <relifenatu@gmail.com> and Jesús Bravo <js_bravo98@uma.es>
+## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
+## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
 ## 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
