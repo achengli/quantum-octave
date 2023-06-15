@@ -33,11 +33,13 @@
 % @end deftypefn
 
 function qb = qc_ket(qb) 
-    if nargin < 1 && !isvector(qb),
+    if nargin < 1 && ~isvector(qb),
         print_usage();
     end
-    qb = qb ./norm(qb);
+    if (norm(qb) != 0)
+        qb = qb ./norm(qb);
+    end
     if (size(qb,1) != length(qb)),
         qb = reshape(qb,length(qb),1);       % create column vector.
     end
-end;
+end

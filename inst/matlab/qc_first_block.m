@@ -40,7 +40,7 @@
 % @seealso{qc_second_block,qc_second_block_noCNOT}
 % @end deftypefn
 function out = qc_first_block()
-    if !exist('qc_defs_loaded'),
+    if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
     end
     qb0 = [1;0];
@@ -54,4 +54,4 @@ function out = qc_first_block()
     op3 = kron(I, kron(CNOT, I));
 
     out = qc_ket(op3 * op2 * op1 * qc0);
-end;
+end

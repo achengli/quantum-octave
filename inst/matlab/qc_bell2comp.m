@@ -43,10 +43,10 @@
 % @end deftypefn
 
 function qb2_comp=qc_bell2comp(qb2_bell)
-    if nargin < 1 || !ismatrix(qb2_bell),
+    if nargin < 1 || ~ismatrix(qb2_bell),
         print_usage();
     end
-    if !exist('qc_defs_loaded'),
+    if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
     end
     qb2_comp=kron(H,I)*CNOT*qc_ket(qb2_bell);

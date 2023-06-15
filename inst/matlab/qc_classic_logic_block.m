@@ -52,15 +52,15 @@ function Mout=qc_classic_logic_block(M)
         print_usage();
     end
     M = reshape(M,4,1);
-    if !exist('qc_defs_loaded'), 
+    if ~exist('qc_defs_loaded'), 
         load qc_defs.mat;
     end
-    if !exist('M_coefs_loaded'),
+    if ~exist('M_coefs_loaded'),
         load M_coefs.mat;
     end
     index = sum((2.^[3 2 1 0]') .* M)+1;
     Mout=Mp_m(index,:)';
-end;
+end
 
 %! assert(qc_classic_logic_block([ 0 0 0 0]') == [0 1 0 1]')
 %! assert(qc_classic_logic_block([ 0 0 1 1]') == [1 1 1 0]')

@@ -51,12 +51,12 @@ function qbout=qc_teleport(qbin1, qbin2)
     end
     qbin1 = qc_ket(qbin1); qbin2 = qc_ket(qbin2);
     input_bell = kron(qbin1, kron(qc_first_block(),qbin2));
-    
+
     qbits_measured = qc_split(input_bell);
-    
+
     comp_top = qc_split(qc_bell2comp([qbits_measured(1,:) qbits_measured(2,:)]));
     comp_bottom = qc_split(qc_bell2comp([qbits_measured(5,:) qbits_measured(6,:)]));
-    
+
     M2 = (find(comp_top(1,:) == max(comp_top(1,:))) - 1)(1);
     M1 = (find(comp_top(2,:) == max(comp_top(2,:))) - 1)(1);
     M4 = (find(comp_bottom(1,:) == max(comp_bottom(1,:))) - 1)(1);
@@ -68,4 +68,4 @@ function qbout=qc_teleport(qbin1, qbin2)
     load qc_defs.mat;
     qbits_op_in = qc_ket(kron(qbits_measured(3,:),qbits_measured(4,:)));
     qbout = kron(X.^M2p * Z.^M1p,X.^M4p * Z.^M3p) * qbits_op_in;
-end;
+end

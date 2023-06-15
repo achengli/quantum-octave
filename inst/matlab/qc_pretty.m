@@ -27,10 +27,10 @@
 % @end deftypefn
 
 function qc_pretty(qbincomp)
-    if !exist('qc_defs_loaded'),
+    if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
     end
-    if nargin < 1 || !isvector(qbincomp),
+    if nargin < 1 || ~isvector(qbincomp),
         print_usage();
     end
     qbincomp = qc_ket(qbincomp); N = length(qbincomp);
@@ -39,4 +39,4 @@ function qc_pretty(qbincomp)
         str = strvcat(str, strcat([' |' dec2bin(n,log2(N)) '>']));
     end
     strcat(num2str(qbincomp),str)
-end;
+end

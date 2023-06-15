@@ -55,11 +55,11 @@ if (nargin < 2 || length(M) < 4),
     end
     reshape(M,4,1);
     
-    if !exist('qc_defs_loaded'),
+    if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
-    end    
+    endif    
 
     M1=M(1);M2=M(2);M3=M(3);M4=M(4);
     op = kron((X^M2) * (Z^M1),(X^M4) * (Z^M3));
     out = qc_ket(op*qbin);
-end;
+end

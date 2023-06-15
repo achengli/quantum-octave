@@ -36,7 +36,9 @@ function qb = qc_ket(qb)
     if nargin < 1 && ~isvector(qb),
         print_usage();
     endif
-    qb = qb ./norm(qb);
+    if (norm(qb) != 0)
+        qb = qb ./norm(qb);
+    endif
     if (size(qb,1) != length(qb)),
         qb = reshape(qb,length(qb),1);       % create column vector.
     endif
