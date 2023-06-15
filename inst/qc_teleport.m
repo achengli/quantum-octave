@@ -45,7 +45,7 @@
 ## @end itemize
 ## @end deftypefn
 
-function out=qc_teleport_final(qba, qbb)
+function out=qc_teleport(qba, qbb)
     if (nargin < 2 || !ismatrix(qba) || !ismatrix(qbb))
         print_usage();
     endif
@@ -57,14 +57,20 @@ function out=qc_teleport_final(qba, qbb)
     qba = qc_ket(qba); qbb = qc_ket(qbb);
     
     # This is the first input layer, before Bells meter and classic logic block.
-    inp_bell = kron(qba, kron(qc_first_block(), qbb));
+    qc_first_block_qbits = qc_split(qc_first_block());
+    inp_bell = qbb;
+    for qb_iter = 1:size(qc_first_block_qbits,1),
+        inp_bell = kron(qc_ket(qc_first_block_qbits(qb_iter,:)), inp_bell);
+    endfor
+    inp_bell = kron(qba,inp_bell);
+
     # We need the individual qbits for the Bells meter. Takes two joint qbits and returns 
     # the equivalent in computational base.
     qb_measured = qc_split(inp_bell);
     # comp_top is the computational output of the first Bells meter block (the top one), 
     # comp_bottom is second one.
     comp_top = qc_split(qc_bell2comp([qb_measured(1,:) qb_measured(2,:)]));
-    comp_bottom = qc_split(qc_bell2comp([qbits_measured(5,:) qbits_measured(6,:)]));
+    comp_bottom = qc_split(qc_bell2comp([qb_measured(6,:) qb_measured(5,:)]));
 
     # This is a lambda function that returns the first element that find function delivers.
     find_first = @(condition) find(condition)(1);
@@ -72,18 +78,20 @@ function out=qc_teleport_final(qba, qbb)
     # Coefficients for the X and Z gates with the CNOT module. This vector will be
     # processed to return back other one with the suit coefficients for the classic logic 
     # block. (*)
-    M = [find_first(comp_top(1,:) != 0) - 1; find_first(comp_top(2,:) != 0) - 1;
-        find_first(comp_bottom(1,:) != 0) - 1; find_first(comp_bottom(2,:) != 0) - 1
-    ];
+    M = [find_first(comp_top(1,:) == max(comp_top(1,:))) - 1; 
+            find_first(comp_top(2,:) ==  max(comp_top(2,:))) - 1;
+            find_first(comp_bottom(1,:) == max(comp_bottom(1,:))) - 1; 
+            find_first(comp_bottom(2,:) == max(comp_bottom(2,:))) - 1
+    ]
 
     # Classic logic block. Generates the M coefficients adapted to the next step.
-    Mp = qc_classic_logic_block(M);
+    Mp = qc_classic_logic_block(M)
     M1p = Mp(1);M2p = Mp(2);M3p = Mp(3);M4p = Mp(4);
 
     # Creates the combinated qbits state to be the input for the last layer.
     qbits_op_in = qc_ket(kron(qb_measured(3,:), qb_measured(4,:)));
     # Finally returns the result of operate the X and Z gates layer to the previous input.
-    out = kron(Z^Mp1 * X^Mp2, Z^Mp3 * X^Mp4) * qbits_op_in;
+    out = kron(Z^M1p * X^M2p, Z^M3p * X^M4p) * qbits_op_in;
 endfunction
 
 # (*) As you can see, I did some fits for the output of find, that is because the matrix
