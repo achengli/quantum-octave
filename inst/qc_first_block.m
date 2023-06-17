@@ -53,5 +53,17 @@ function out = qc_first_block()
     op2 = kron(CNOT, CNOTi);
     op3 = kron(I, kron(CNOT, I));
 
-    out = qc_ket(op3 * op2 * op1 * qc0);
+    out = op3 * op2 * op1 * qc0;
+    out = out ./ max(out);
 endfunction;
+
+%!demo
+%! "Salida sin normalizar:"
+%! qc_first_block()
+%! "Salida normalizada:"
+%! qc_ket(qc_first_block())
+%! "Qbits separados:"
+%! qc_split(qc_first_block())
+%! "Qbits separados sin normalizar:"
+%! k = qc_split(qc_first_block());
+%! k ./ max(k)

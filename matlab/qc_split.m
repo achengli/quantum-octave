@@ -31,8 +31,6 @@
 % @end itemize
 % @end deftypefn
 
-
-
 function out=qc_split(qbin)
     qbin = qc_ket(qbin);
     N = ceil(log2(size(qbin,1)));
@@ -42,6 +40,7 @@ function out=qc_split(qbin)
         out(iter,:) = qc_ket([sum(qbin(find(str2num(qbin_str(:,iter)) == 0))), ...
                  sum(qbin(find(str2num(qbin_str(:,iter)) == 1)))])';
     end
+    out = out ./ max(out);
 end
 
 

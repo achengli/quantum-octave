@@ -15,44 +15,48 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 % -*- texinfo -*-
-% @deftypefn {octave_qbits} {@var{qb2_comp} =} qc_bell2comp(@var{qb2_bell})
+% @deftypefn @qcode{@var{out} =} qc_second_block (@var{qbin}, @var{M})
 %
-% Conversion from Computational base to Bell base.
+% Intermediate block of the teleport circuit. This block is after the first_block and before
+% the bell predictor.
 % 
-% Parameters:
+% @ifnottex
+% @example
+%		         M2    M1
+%		          |    |
+%		----o-----X----Z-----o-----
+%		    |                |
+%		----X-----X----Z-----X-----
+%		          |    |
+%		         M4    M3
+% @end example
+% @end ifnottex
+%
+% Params:
 % @itemize
-% @item @var{qb2_bell} Vector in bell base. 
+% @item @var{qbin} input qbit state
+% @item @var{M} circuit coefficients 
 % @end itemize
 %
 % Return:
 % @itemize
-% @item @var{qb2_comp} Vector in computational base.
+% @item @var{out} result after the circuit
 % @end itemize
 % 
-% @ifnottex
-% @example
-% 
-% Implemented circuit.
-%
-% |BELL> --o--H-- |COMP>
-%          |          
-% |BELL> --X--I-- |COMP>
-% 
-% @end example
-% @end ifnottex
+% @seealso{qc_second_block_noCNOT}
 % @end deftypefn
 
-function qb2_comp=qc_bell2comp(qb2_bell)
-    if nargin < 1 || ~ismatrix(qb2_bell),
+function out = qc_second_block(qb_in,M)
+    if (nargin < 2 || length(M) < 4),
         print_usage();
     end
+    reshape(M,4,1);
+
     if ~exist('qc_defs_loaded'),
         load qc_defs.mat;
-    end
-    qb2_comp=kron(H,I)*CNOT*qc_ket(qb2_bell);
-end
+    endif    
 
-%! assert (qc_bell2comp((1/sqrt(2))[1 0 0 1]') == [1.0 0 0 0]')
-%! assert (qc_bell2comp((1/sqrt(2))[0 1 1 0]') == [0 1.0 0 0]')
-%! assert (qc_bell2comp((1/sqrt(2))[1 0 0 -1]') == [0 0 1.0 0]')
-%! assert (qc_bell2comp((1/sqrt(2))[0 1 -1 0]') == [0 0 0 1.0]')
+    M1=M(1);M2=M(2);M3=M(3);M4=M(4);
+    op = CNOT*kron((Z^M1) * (X^M2),(Z^M3) * (X^M4))*CNOT;
+    out = qc_ket(op*qb_in);
+end

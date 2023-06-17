@@ -67,5 +67,5 @@ function qbout=qc_teleport(qbin1, qbin2)
 
     load qc_defs.mat;
     qbits_op_in = qc_ket(kron(qbits_measured(3,:),qbits_measured(4,:)));
-    qbout = kron(X.^M2p * Z.^M1p,X.^M4p * Z.^M3p) * qbits_op_in;
+    qbout = kron(Z^Mp1 * X^Mp2, Z^Mp3 * X^Mp4) * qbits_op_in;
 end

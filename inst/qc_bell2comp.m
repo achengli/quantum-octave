@@ -46,10 +46,11 @@ function qb2_comp=qc_bell2comp(qb2_bell)
     if nargin < 1 || ~ismatrix(qb2_bell),
         print_usage();
     endif
-    if ~exist('qc_defs_loaded'),
+    if !exist('qc_defs_loaded'),
         load qc_defs.mat;
     endif
-    qb2_comp=kron(H,I)*CNOT*qc_ket(qb2_bell);
+    qb2_bell = reshape(qb2_bell,length(qb2_bell),1);
+    qb2_comp=kron(H,I)*CNOT*qb2_bell;
 endfunction
 
 %! assert (qc_bell2comp((1/sqrt(2))[1 0 0 1]') == [1.0 0 0 0]')

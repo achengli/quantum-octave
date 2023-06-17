@@ -1,8 +1,8 @@
 local lfs = require'lfs'
 
-for iter, _ in lfs.dir('.') do
+for iter, _ in lfs.dir('inst') do
     if string.match(iter, '%w+%.m$') then
-        local f = io.open(iter,'r')
+        local f = io.open('inst/' .. iter,'r')
         if not f then error('Error opening ' .. iter) end
         local buff = ''
         for line in f:lines() do

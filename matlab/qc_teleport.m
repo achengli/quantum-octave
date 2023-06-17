@@ -1,58 +1,58 @@
-## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com>
-## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
-##
-## This program is free software: you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation, either version 3 of the License, or
-## any later version.
-##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+% Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com>
+% Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-## -*- texinfo -*-
-## @deftypefn {octave_qbits} {@var{qbout} =} qc_teleport(@var{qba},@var{qbb})
-##
-## @ifnottex
-## @example
-##                                                              ______              ___________
-##	α₀|0> + α₁|1>	--------------------------------------/ BELL |------+     /  ______M2 \M1
-##		            +-----------------------+    _____\______|-v    |    /  /      \   \
-##        		    |                       |---/        +-------------+/  /        \   \
-##		            |                       |-----o------|  Classical  |--     o-----X----Z---- \
-##		            |    qc_first_block     |            |    Logic    |                         |==> α₀β₀|00> + α₀β₁|01> + α₁β₀|10> + α₁β₁|11>
-##		            |                       |-----o------|             |--     o-----X----Z---- /
-##		            |                       |---\      __+-------------+\  \        /   /
-##		            +-----------------------+    \____/BELL |--^    |    \  \______/M4 /M3
-##	β₀|0> + β₁|1>   --------------------------------------\_____|-------+     \___________/
-##
-## @end example
-## @end ifnottex
-##
-## Params:
-## @itemize
-## @item qba Input    α₀|0> + α₁|1>
-## @item qbb Input    β₀|0> + β₁|1>
-## @end itemize
-##
-## Return:
-## @itemize
-## @item qbout Output   α₀β₀|00> + α₀β₁|01> + α₁β₀|10> + α₁β₁|11>
-## @end itemize
-## @end deftypefn
+% -*- texinfo -*-
+% @deftypefn {octave_qbits} {@var{qbout} =} qc_teleport(@var{qba},@var{qbb})
+%
+% @ifnottex
+% @example
+%                                                              ______              ___________
+%	α₀|0> + α₁|1>	--------------------------------------/ BELL |------+     /  ______M2 \M1
+%		            +-----------------------+    _____\______|-v    |    /  /      \   \
+%        		    |                       |---/        +-------------+/  /        \   \
+%		            |                       |-----o------|  Classical  |--     o-----X----Z---- \
+%		            |    qc_first_block     |            |    Logic    |                         |==> α₀β₀|00> + α₀β₁|01> + α₁β₀|10> + α₁β₁|11>
+%		            |                       |-----o------|             |--     o-----X----Z---- /
+%		            |                       |---\      __+-------------+\  \        /   /
+%		            +-----------------------+    \____/BELL |--^    |    \  \______/M4 /M3
+%	β₀|0> + β₁|1>   --------------------------------------\_____|-------+     \___________/
+%
+% @end example
+% @end ifnottex
+%
+% Params:
+% @itemize
+% @item qba Input    α₀|0> + α₁|1>
+% @item qbb Input    β₀|0> + β₁|1>
+% @end itemize
+%
+% Return:
+% @itemize
+% @item qbout Output   α₀β₀|00> + α₀β₁|01> + α₁β₀|10> + α₁β₁|11>
+% @end itemize
+% @end deftypefn
 
 function out=qc_teleport(qba, qbb)
     if (nargin < 2 || !ismatrix(qba) || !ismatrix(qbb))
         print_usage();
-    endif
+    end
 
     if !(exist('qc_defs_loaded'))
         load qc_defs.mat;
-    endif
+    end
     
     qba = qc_ket(qba); qbb = qc_ket(qbb);
     
@@ -62,7 +62,7 @@ function out=qc_teleport(qba, qbb)
     inp_bell = qbb;
     for qb_iter = 1:size(qc_first_block_qbits,1),
         inp_bell = kron(qc_first_block_qbits(qb_iter,:)', inp_bell);
-    endfor
+    end
     inp_bell = kron(qba,inp_bell);
 
     # We need the individual qbits for the Bells meter. Takes two joint qbits and returns 
@@ -101,7 +101,7 @@ function out=qc_teleport(qba, qbb)
 
     # Finally returns the result of operate the X and Z gates layer to the previous input.
     out = kron(Z^M1p * X^M2p, Z^M3p * X^M4p) * qbits_op_in;
-endfunction
+end
 
 # (*) As you can see, I did some fits for the output of find, that is because the matrix
 #   that represents the gates only takes 0 or 1 as input, for that I did a search to find the

@@ -15,51 +15,45 @@
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 % -*- texinfo -*-
-% @deftypefn {octave_qbits} @qcode{@var{out} =} qc_second_block_noCNOT (@var{qbin}, @var{M})
+% @deftypefn {octave_qbits} {@var{qb2_comp} =} qc_bell2comp(@var{qb2_bell})
 %
-% Intermediate block of the teleport circuit without CNOT blocks. This block
-% is used to obtain results representing how will be the output if we removed
-% CNOT blocks.
+% Conversion from Computational base to Bell base.
+% 
+% Parameters:
+% @itemize
+% @item @var{qb2_bell} Vector in bell base. 
+% @end itemize
+%
+% Return:
+% @itemize
+% @item @var{qb2_comp} Vector in computational base.
+% @end itemize
 % 
 % @ifnottex
 % @example
-%		         M2    M1
-%		          |    |
-%		     -----X----Z-----
-%		                    
-%		     -----X----Z-----
-%		          |    |
-%		         M4    M3
+% 
+% Implemented circuit.
+%
+% |BELL> --o--H-- |COMP>
+%          |          
+% |BELL> --X--I-- |COMP>
+% 
 % @end example
 % @end ifnottex
-%
-% Params:
-% 
-% @itemize
-% @item @var{qbin}
-% @item @var{M}
-% @end itemize
-% 
-% Return:
-% 
-% @itemize
-% @item @var{out}
-% @end itemize
-%
-% @seealso{qc_defs_generator}
 % @end deftypefn
 
-function out=qc_second_block_noCNOT(qbin,M)
-if (nargin < 2 || length(M) < 4),
+function qb2_comp=qc_bell2comp(qb2_bell)
+    if nargin < 1 || ~ismatrix(qb2_bell),
         print_usage();
     end
-    reshape(M,4,1);
-    
-    if ~exist('qc_defs_loaded'),
+    if !exist('qc_defs_loaded'),
         load qc_defs.mat;
-    endif    
-
-    M1=M(1);M2=M(2);M3=M(3);M4=M(4);
-    op = kron((X^M2) * (Z^M1),(X^M4) * (Z^M3));
-    out = qc_ket(op*qbin);
+    end
+    qb2_bell = reshape(qb2_bell,length(qb2_bell),1);
+    qb2_comp=kron(H,I)*CNOT*qb2_bell;
 end
+
+%! assert (qc_bell2comp((1/sqrt(2))[1 0 0 1]') == [1.0 0 0 0]')
+%! assert (qc_bell2comp((1/sqrt(2))[0 1 1 0]') == [0 1.0 0 0]')
+%! assert (qc_bell2comp((1/sqrt(2))[1 0 0 -1]') == [0 0 1.0 0]')
+%! assert (qc_bell2comp((1/sqrt(2))[0 1 -1 0]') == [0 0 0 1.0]')

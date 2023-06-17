@@ -40,6 +40,7 @@ function out=qc_split(qbin)
         out(iter,:) = qc_ket([sum(qbin(find(str2num(qbin_str(:,iter)) == 0))), ...
                  sum(qbin(find(str2num(qbin_str(:,iter)) == 1)))])';
     endfor
+    out = out ./ max(out);
 endfunction;
 
 
