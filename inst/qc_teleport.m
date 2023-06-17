@@ -72,7 +72,12 @@ function out=qc_teleport(qba, qbb)
     # comp_top is the computational output of the first Bells meter block (the top one), 
     # comp_bottom is second one.
     comp_top = qc_split(qc_bell2comp([qb_measured(1,:) qb_measured(2,:)]));
-    comp_bottom = qc_split(qc_bell2comp([qb_measured(6,:) qb_measured(5,:)]));
+    "Entrada al medidor de Bell:"
+    [qb_measured(1,:) qb_measured(2,:)]
+    "Salida del medidor de Bell en la \"base computacional\":"
+    qc_bell2comp([qb_measured(1,:) qb_measured(2,:)])
+
+    comp_bottom = qc_split(qc_bell2comp([qb_measured(5,:) qb_measured(6,:)]));
 
     # This is a lambda function that returns the first element that find function delivers.
     find_first = @(condition) find(condition)(1);
