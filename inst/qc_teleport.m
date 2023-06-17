@@ -57,6 +57,7 @@ function out=qc_teleport(qba, qbb)
     qba = qc_ket(qba); qbb = qc_ket(qbb);
     
     # This is the first input layer, before Bells meter and classic logic block.
+    # |qba> ⊗ (|0> + |1>) ⊗ (|0> + |1>) ⊗ (|0> + |1>) ⊗ (|0> + |1>) ⊗ |qbb>
     qc_first_block_qbits = qc_split(qc_first_block());
     inp_bell = qbb;
     for qb_iter = 1:size(qc_first_block_qbits,1),
@@ -67,6 +68,7 @@ function out=qc_teleport(qba, qbb)
     # We need the individual qbits for the Bells meter. Takes two joint qbits and returns 
     # the equivalent in computational base.
     qb_measured = qc_split(inp_bell);
+
     # comp_top is the computational output of the first Bells meter block (the top one), 
     # comp_bottom is second one.
     comp_top = qc_split(qc_bell2comp([qb_measured(1,:) qb_measured(2,:)]));
@@ -82,7 +84,7 @@ function out=qc_teleport(qba, qbb)
             find_first(comp_top(2,:) ==  max(comp_top(2,:))) - 1;
             find_first(comp_bottom(1,:) == max(comp_bottom(1,:))) - 1; 
             find_first(comp_bottom(2,:) == max(comp_bottom(2,:))) - 1
-    ]
+        ];
 
     # Classic logic block. Generates the M coefficients adapted to the next step.
     Mp = qc_classic_logic_block(M)
@@ -90,13 +92,20 @@ function out=qc_teleport(qba, qbb)
 
     # Creates the combinated qbits state to be the input for the last layer.
     qbits_op_in = qc_ket(kron(qb_measured(3,:), qb_measured(4,:)));
+
     # Finally returns the result of operate the X and Z gates layer to the previous input.
     out = kron(Z^M1p * X^M2p, Z^M3p * X^M4p) * qbits_op_in;
 endfunction
 
 # (*) As you can see, I did some fits for the output of find, that is because the matrix
-# that represents the gates only takes 0 or 1 as input, for that I did a search to find the
-# vector elements that are diferent from 0, that means that if the result is 1 means that 
-# the qbit |0> is not 0 and then substracting 1 to the localization, the final result is 0, means that we have to elevate by 0 the matrix X or Z according to the coefficient that we are 
-# treating on.
+#   that represents the gates only takes 0 or 1 as input, for that I did a search to find the
+#   vector elements that are diferent from 0, that means that if the result is 1 means that 
+#   the qbit |0> is not 0 and then substracting 1 to the localization, the final result is 0,
+#   means that we have to elevate by 0 the matrix X or Z according to the coefficient that we
+#   are treating on.
 
+%!demo
+%! disp(qc_teleport([1,1],[1,1]))
+
+%!test
+%! assert(qc_teleport([1 0],[0 1]) == .5*[0 1 0 0]')

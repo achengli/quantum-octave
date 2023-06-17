@@ -57,6 +57,6 @@ function out = qc_second_block(qb_in,M)
     endif    
 
     M1=M(1);M2=M(2);M3=M(3);M4=M(4);
-    op = CNOT*kron((X^M2) * (Z^M1),(X^M4) * (Z^M3))*CNOT;
+    op = CNOT*kron((Z^M1) * (X^M2),(Z^M3) * (X^M4))*CNOT;
     out = qc_ket(op*qb_in);
 endfunction;
