@@ -23,7 +23,5 @@ commit:
 	@lua inst/tomatlab.lua
 	git add .
 	git commit -m $$(date +'%d-%m-%Y')
-	@eval `ssh-agent -s`
-	@ssh-add ~/.ssh/fermentaria_ed25519
 	git push origin master
 
