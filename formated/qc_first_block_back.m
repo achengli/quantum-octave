@@ -1,19 +1,3 @@
-## Copyright (C) 2023 Yassin Achengli <relifenatu@gmail.com> 
-## Copyright (C) 2023 Jesús Bravo <js_bravo98@uma.es>
-## 
-## This program is free software: you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation, either version 3 of the License, or
-## any later version.
-## 
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-## 
-## You should have received a copy of the GNU General Public License
-## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 ## -*- texinfo -*-
 ## @deftypefn {octave_qbits} {@var{out} =} qc_first_block ()
 ##
@@ -53,11 +37,17 @@ function out = qc_first_block()
     op2 = kron(CNOT, CNOTi);
     op3 = kron(I, kron(CNOT, I));
 
-    out = op3 * op2 * op1;
-    % out = (out * qc0) ./ max(out * qc0);
+    out = op3 * op2 * op1 * qc0;
+    out = out ./ max(out);
 endfunction;
 
 %!demo
 %! "Salida sin normalizar:"
-%! k = qc_first_block()
-%! disp(size(k))
+%! qc_first_block()
+%! "Salida normalizada:"
+%! qc_ket(qc_first_block())
+%! "Qbits separados:"
+%! qc_split(qc_first_block())
+%! "Qbits separados sin normalizar:"
+%! k = qc_split(qc_first_block());
+%! k ./ max(k)

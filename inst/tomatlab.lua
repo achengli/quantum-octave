@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 local lfs = require'lfs'
 
 for iter, _ in lfs.dir('inst') do
@@ -6,7 +7,7 @@ for iter, _ in lfs.dir('inst') do
         if not f then error('Error opening ' .. iter) end
         local buff = ''
         for line in f:lines() do
-            buff = buff .. line:gsub('end%w+[; ]?$','end'):gsub('##','%%') .. '\n'
+            buff = buff .. line:gsub('end%w+[; ]?$','end'):gsub('#+','%%') .. '\n'
         end
         f:close()
         f = io.open('matlab/' .. iter,'w')
