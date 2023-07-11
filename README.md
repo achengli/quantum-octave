@@ -9,5 +9,4 @@ GNU Octave qbits Toolbox. Implement some important and useful blocks and qbit fu
 
 ## Mantainers
 - **Yassin Achengli** *<relifenatu@gmail.com>*
-- **Jesús Bravo** *<js_bravo98@uma.es>*
 
