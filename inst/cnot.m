@@ -1,2 +1,3 @@
 function C = cnot ()
+
 endfunction
