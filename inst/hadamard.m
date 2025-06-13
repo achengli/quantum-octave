@@ -1,0 +1,2 @@
+function H = hadamard()
+endfunction
