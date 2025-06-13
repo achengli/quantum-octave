@@ -1,12 +1,9 @@
-# octave_qbits
-
-![octave_qbits](https://notabug.org/windy_clouds/octave_qbits/raw/master/logo.png)
+# GNU Octave quantum simulator package
 ---
+![Octave quanum logo](logo.png)
 
-GNU Octave qbits Toolbox. Implement some important and useful blocks and qbit functions.
+This package is a simulator of quantum efects oriented to computing.
 
----
+**It is on progress.**
 
-## Mantainers
-- **Yassin Achengli** *<relifenatu@gmail.com>*
 
