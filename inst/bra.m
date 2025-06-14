@@ -16,24 +16,45 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn   {quantum-octave} {@var{k0} =} ket0 ()
+## @deftypefn   {quantum-octave} {@var{k} =} bra (@var{n})
+## @deftypefnx  {quantum-octave} {@var{k} =} bra (@var{n}, @var{M})
 ##
-## Returns |0> quantum state.
+## Returns @var{M} - dimensional bra "if the parameter was passed" with the @var{n} 
+## bra state; another way to use it is passing only @var{n} using to be the dimension 
+## and the bra state at same time.
 ##
+## If @var{n} is 1, the dimension will be taken as two (it is the minimum to be a 
+## quantum state).
 ## @tex
-## \vert 0\rangle = \begin{bmatrix}
-## 1 \\
-## 0
+## \langle b\vert = \begin{bmatrix}
+## 0 & 0 & \dots & 1 & \dots & 0 & 0
 ## \end{bmatrix}
 ## @end tex
-## @seealso{ket, ket1}
+## @seealso{ket, bra0, bra1}
 ## @end deftypefn
 
-function k0 = ket0 ()
+function b = bra (n, M);
 
-  k0 = ket (1);
+  ispositive = @ (x) (isinteger (x) && x > 0);
+
+  if (nargin < 1 || !ispositive (n))
+    print_usage
+  endif
+
+  if (nargin == 1)
+    b = conj (ket (n)');
+  else
+    if (ispositive (M) && M > n)
+      b = conj (ket (n, M)');
+    else
+      print_usage
+    endif
+  endif
 
 endfunction
 
 %!demo
-%! ket0 ()
+%! bra (3)
+
+%!demo
+%! bra (4, 6)

@@ -16,24 +16,23 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn   {quantum-octave} {@var{k0} =} ket0 ()
+## @deftypefn   {quantum-octave} {@var{b1} =} bra1 ()
 ##
-## Returns |0> quantum state.
+## Returns <1| quantum state.
 ##
 ## @tex
-## \vert 0\rangle = \begin{bmatrix}
-## 1 \\
-## 0
+## \langle 1\ver = \begin{bmatrix}
+## 0 & 1
 ## \end{bmatrix}
 ## @end tex
-## @seealso{ket, ket1}
+## @seealso{bra, bra0}
 ## @end deftypefn
 
-function k0 = ket0 ()
+function b1 = bra1 ()
 
-  k0 = ket (1);
+  b1 = bra (2);
 
 endfunction
 
 %!demo
-%! ket0 ()
+%! bra1 ()
