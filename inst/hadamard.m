@@ -1,2 +1,2 @@
-function H = hadamard()
+function H = hadamard (n)
 endfunction
