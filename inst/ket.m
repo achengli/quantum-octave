@@ -51,7 +51,7 @@ function k = ket (n, M)
     if (n == 1)
       k = circshift (eye (2, 1), n-1);
     else
-      k = circshift (eye (2, 1), n-1);
+      k = circshift (eye (n, 1), n-1);
     endif
   else
     if (ispositive (M) && M > n)
